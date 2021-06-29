@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Fizzler.Systems.HtmlAgilityPack" Version="1.2.0" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.16" />
+    <PackageReference Include="AngleSharp" Version="0.16.0" />
+    <PackageReference Include="Fizzler.Systems.HtmlAgilityPack" Version="1.2.1" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.34" />
   </ItemGroup>
 
 </Project>

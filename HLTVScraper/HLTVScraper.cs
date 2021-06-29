@@ -7,12 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using static HLTVScraper.Utility;
 
-namespace HltvApi.Parsing
+namespace HLTVScraper
 {
-    public static partial class HltvParser
+    public static class HltvMatchParser
     {
         public static Task<List<UpcomingMatch>> GetUpcomingMatches(WebProxy proxy = null)
         {
@@ -70,7 +70,7 @@ namespace HltvApi.Parsing
                     //Team 2 ID and name
                     Team team2Model = new Team();
                     string team2LogoUrl = teamNodes[1].QuerySelector("img").Attributes["src"].Value;
-                    team2Model.Id = int.Parse(team2LogoUrl.Split('/').Last());
+                    team2Model.Id = int.Parse(team1LogoUrl.Split('/').Last());
                     team2Model.Name = teamNodes[1].QuerySelector("img").Attributes["alt"].Value;
                     model.Team2 = team2Model;
 

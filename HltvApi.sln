@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29006.145
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HltvApi", "HltvApi\HltvApi.csproj", "{65EDAD4B-6CA1-4168-B5F8-A80BE23C91D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLTVScraper", "HLTVScraper\HLTVScraper.csproj", "{8A6487A8-B868-4193-A111-D133330A00AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testscraping", "testscraping\testscraping.csproj", "{CE2BC7C8-3DF0-4AA2-946E-C44BB1795C97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{65EDAD4B-6CA1-4168-B5F8-A80BE23C91D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65EDAD4B-6CA1-4168-B5F8-A80BE23C91D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65EDAD4B-6CA1-4168-B5F8-A80BE23C91D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A6487A8-B868-4193-A111-D133330A00AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A6487A8-B868-4193-A111-D133330A00AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A6487A8-B868-4193-A111-D133330A00AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A6487A8-B868-4193-A111-D133330A00AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE2BC7C8-3DF0-4AA2-946E-C44BB1795C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE2BC7C8-3DF0-4AA2-946E-C44BB1795C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE2BC7C8-3DF0-4AA2-946E-C44BB1795C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE2BC7C8-3DF0-4AA2-946E-C44BB1795C97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

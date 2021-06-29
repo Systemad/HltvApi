@@ -30,7 +30,7 @@ namespace HltvApi.Parsing
 
             HtmlNode document = html.DocumentNode;
 
-            FullMatch model = new FullMatch();
+            var model = new FullMatch();
 
             model.Id = id;
 
@@ -42,8 +42,8 @@ namespace HltvApi.Parsing
             try
             {
                 string preformattedText = document.QuerySelector(".preformatted-text").InnerText;
-                model.Format = preformattedText.Split('\n', StringSplitOptions.RemoveEmptyEntries).First();
-                model.AdditionalInfo = preformattedText.Substring(preformattedText.IndexOf('\n') + 1);
+                model.Format = preformattedText.Split('\n').First();
+                //model.AdditionalInfo = preformattedText.Substring(preformattedText.IndexOf('\n') + 1);
             }
             catch (Exception)
             {
@@ -52,14 +52,14 @@ namespace HltvApi.Parsing
 
             //Team 1
             Team team1 = new Team();
-            team1.Id = int.Parse(document.QuerySelectorAll(".team img.logo").First().Attributes["src"].Value.Split('/').Last());
-            team1.Name = document.QuerySelectorAll(".team img.logo").First().Attributes["title"].Value;
+            //team1.Id = int.Parse(document.QuerySelectorAll(".logo team1Logo").First().Attributes["src"].Value.Split('/').Last());
+            team1.Name = document.QuerySelectorAll(".team1Logo").First().Attributes["title"].Value;
             model.Team1 = team1;
 
             //Team 2
             Team team2 = new Team();
-            team2.Id = int.Parse(document.QuerySelectorAll(".team img.logo").Last().Attributes["src"].Value.Split('/').Last());
-            team2.Name = document.QuerySelectorAll(".team img.logo").Last().Attributes["title"].Value;
+            //team2.Id = int.Parse(document.QuerySelectorAll(".team img.logo").Last().Attributes["src"].Value.Split('/').Last());
+            team2.Name = document.QuerySelectorAll(".team1Logo").Last().Attributes["title"].Value;
             model.Team2 = team2;
 
             //Winning team

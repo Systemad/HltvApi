@@ -22,13 +22,13 @@ namespace HltvApi.Parsing
             var client = new HttpClient(httpClientHandler);
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri("http://www.hltv.org/" + url),
+                RequestUri = new Uri("https://www.hltv.org/" + url),
                 Method = HttpMethod.Get,
             };
 
             request.Headers.Add("Referer", "https://www.hltv.org/stats");
             request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
-            T result = await client.SendAsync(request).ContinueWith((response) => continueWith(response));
+            T result = await client.SendAsync(request).ContinueWith(continueWith);
             return result;
         }
 
