@@ -64,7 +64,7 @@ namespace HltvApi.Parsing
                 {
                     Event relatedEventModel = new Event();
                     relatedEventModel.Name = relatedEventNode.Attributes["title"].Value;
-                    relatedEventModel.Id = int.Parse(relatedEventNode.Attributes["src"].Value.Split('/').Last().Split(".").First());
+                    //relatedEventModel.Id = int.Parse(relatedEventNode.Attributes["src"].Value.Split('/').Last().Split(".").First());
                     relatedEvents.Add(relatedEventModel);
                 }
                 catch (Exception)  { }
@@ -78,7 +78,7 @@ namespace HltvApi.Parsing
             {
                 Team attendingTeamModel = new Team();
                 attendingTeamModel.Name = attendingTeamNode.QuerySelector("div").InnerText;
-                attendingTeamModel.Id = int.Parse(attendingTeamNode.Attributes["href"].Value.Split('/', StringSplitOptions.RemoveEmptyEntries)[1]);
+                //attendingTeamModel.Id = int.Parse(attendingTeamNode.Attributes["href"].Value.Split('/', StringSplitOptions.RemoveEmptyEntries)[1]);
                 attendingTeams.Add(attendingTeamModel);
             }
             model.Teams = attendingTeams.ToArray();

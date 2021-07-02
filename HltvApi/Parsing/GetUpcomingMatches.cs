@@ -29,7 +29,7 @@ namespace HltvApi.Parsing
 
             HtmlNode document = html.DocumentNode;
 
-            var upcomingMatchNodes = document.QuerySelectorAll(".upcoming-match");
+            var upcomingMatchNodes = document.QuerySelectorAll(".upcomingMatch");
 
             List<UpcomingMatch> upcomingMatches = new List<UpcomingMatch>();
 
@@ -40,7 +40,8 @@ namespace HltvApi.Parsing
                     UpcomingMatch model = new UpcomingMatch();
 
                     //Match ID
-                    string matchPageUrl = upcomingMatchNode.Attributes["href"].Value;
+                    //string matchPageUrl = upcomingMatchNode.InnerHtml; //Attributes["href"].Value;
+                    string matchPageUrl = upcomingMatchNode.QuerySelector("a").Attributes["href"].Value;
                     model.Id = int.Parse(matchPageUrl.Split('/', StringSplitOptions.RemoveEmptyEntries)[1]);
 
                     //Match date
@@ -49,30 +50,35 @@ namespace HltvApi.Parsing
 
                     //Event ID and name
                     Event eventModel = new Event();
-                    string eventImageUrl = upcomingMatchNode.QuerySelector(".event-logo").Attributes["src"].Value;
-                    eventModel.Id = int.Parse(eventImageUrl.Split("/").Last().Split(".").First());
-                    eventModel.Name = upcomingMatchNode.QuerySelector(".event-name").InnerText;
+                    string eventImageUrl = upcomingMatchNode.QuerySelector(".matchEventLogo").Attributes["src"].Value;
+                    //eventModel.Id = int.Parse(matchPageUrl.Split("/").First());
+                    //eventModel.Id = int.Parse(eventImageUrl.Split("/").Last().Split(".").First());
+                    //eventModel.Name = document.QuerySelector(".matchEventName").Attributes["title"].Value;
+                    eventModel.Name = upcomingMatchNode.QuerySelector(".matchEventName").InnerHtml;
                     model.Event = eventModel;
 
                     //Number of stars
                     model.Stars = upcomingMatchNode.QuerySelectorAll(".stars i").Count();
-
-                    var teamNodes = upcomingMatchNode.QuerySelectorAll(".team-cell").ToList();
-                    var resultScoreNode = upcomingMatchNode.QuerySelector(".result-score");
-
-                    //Team 1 ID and name
+                    
+                    var team1Node = upcomingMatchNode.QuerySelector(".team1");
+                    var team1 = team1Node.QuerySelector(".matchTeamName").InnerHtml; // Attributes["matchTeamName"].Value;
+                    
+                    var team2Node = upcomingMatchNode.QuerySelector(".team2");
+                    var team2 = team2Node.QuerySelector(".matchTeamName").InnerHtml;
+                    
+                    // Team 1
                     Team team1Model = new Team();
-                    string team1LogoUrl = teamNodes[0].QuerySelector("img").Attributes["src"].Value;
-                    team1Model.Id = int.Parse(team1LogoUrl.Split('/').Last());
-                    team1Model.Name = teamNodes[0].QuerySelector("img").Attributes["alt"].Value;
+                    string team1LogoUrl = team1Node.QuerySelector(".matchTeamLogo").Attributes["src"].Value;
+                    team1Model.TeamLogoUrl = team1LogoUrl;
+                    team1Model.Name = team1;
                     model.Team1 = team1Model;
-
-                    //Team 2 ID and name
+                    
+                    // Team 2
                     Team team2Model = new Team();
-                    string team2LogoUrl = teamNodes[1].QuerySelector("img").Attributes["src"].Value;
-                    team2Model.Id = int.Parse(team2LogoUrl.Split('/').Last());
-                    team2Model.Name = teamNodes[1].QuerySelector("img").Attributes["alt"].Value;
-                    model.Team2 = team2Model;
+                    string team2LogoUrl = team2Node.QuerySelector(".matchTeamLogo").Attributes["src"].Value;
+                    team1Model.TeamLogoUrl = team2LogoUrl;
+                    team1Model.Name = team2;
+                    model.Team1 = team2Model;
 
                     //Map and format
                     string mapText = upcomingMatchNode.QuerySelector(".map-text").InnerText;
@@ -86,9 +92,9 @@ namespace HltvApi.Parsing
 
                     upcomingMatches.Add(model);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    Console.WriteLine(e.ToString());
                 }
             }
             return upcomingMatches;

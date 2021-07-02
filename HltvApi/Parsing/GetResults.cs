@@ -49,12 +49,13 @@ namespace HltvApi.Parsing
                 //Event ID and name
                 Event eventModel = new Event();
                 string eventImageUrl = resultNode.QuerySelector(".event-logo").Attributes["src"].Value;
+                /*
                 if (eventImageUrl.ToLowerInvariant().Contains("nologo"))
                     eventModel.Id = null;
                 else
                     eventModel.Id = int.Parse(eventImageUrl.
                         Split("/").Last().Split(".").First());
-
+                */
                 eventModel.Name = resultNode.QuerySelector(".event-name").InnerText;
                 model.Event = eventModel;
 
@@ -68,7 +69,7 @@ namespace HltvApi.Parsing
                 //Team 1 ID and name
                 Team team1Model = new Team();
                 string team1LogoUrl = teamNodes[0].QuerySelector("img").Attributes["src"].Value;
-                team1Model.Id = int.Parse(team1LogoUrl.Split('/').Last());
+                //team1Model.Id = int.Parse(team1LogoUrl.Split('/').Last());
                 team1Model.Name = teamNodes[0].QuerySelector("img").Attributes["alt"].Value;
                 model.Team1 = team1Model;
                 model.Team1Score = int.Parse(scoreSpanNodes[0].InnerText);
@@ -76,7 +77,7 @@ namespace HltvApi.Parsing
                 //Team 2 ID and name
                 Team team2Model = new Team();
                 string team2LogoUrl = teamNodes[1].QuerySelector("img").Attributes["src"].Value;
-                team2Model.Id = int.Parse(team2LogoUrl.Split('/').Last());
+                //team2Model.Id = int.Parse(team2LogoUrl.Split('/').Last());
                 team2Model.Name = teamNodes[1].QuerySelector("img").Attributes["alt"].Value;
                 model.Team2 = team2Model;
                 model.Team2Score = int.Parse(scoreSpanNodes[1].InnerText);

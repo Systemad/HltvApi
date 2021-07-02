@@ -37,7 +37,6 @@ namespace HltvApi.Parsing
             //Match date
             long date = long.Parse(document.QuerySelector(".timeAndEvent .date").Attributes["data-unix"].Value);
             model.Date = DateTimeFromUnixTimestampMillis(date);
-
             //Match format
             try
             {
@@ -52,6 +51,8 @@ namespace HltvApi.Parsing
 
             //Team 1
             Team team1 = new Team();
+            Console.WriteLine(team1.Name);
+            
             //team1.Id = int.Parse(document.QuerySelectorAll(".logo team1Logo").First().Attributes["src"].Value.Split('/').Last());
             team1.Name = document.QuerySelectorAll(".team1Logo").First().Attributes["title"].Value;
             model.Team1 = team1;
@@ -71,7 +72,7 @@ namespace HltvApi.Parsing
             //Event
             Event matchEvent = new Event();
             matchEvent.Name = document.QuerySelector(".timeAndEvent .event a").Attributes["title"].Value;
-            matchEvent.Id = int.Parse(document.QuerySelector(".timeAndEvent .event a").Attributes["href"].Value.Split('/', StringSplitOptions.RemoveEmptyEntries)[1]);
+            //matchEvent.Id = int.Parse(document.QuerySelector(".timeAndEvent .event a").Attributes["href"].Value.Split('/', StringSplitOptions.RemoveEmptyEntries)[1]);
             model.Event = matchEvent;
 
             //Maps
@@ -110,6 +111,7 @@ namespace HltvApi.Parsing
                 demo.Url = GetDemoDirectDownloadUrl(demoDownloadUrl);
                 demos.Add(demo);
             }
+            // TODO: ADD TWITCH LINKS LINKS
             model.Demos = demos.ToArray();
 
             //Veto
@@ -140,8 +142,9 @@ namespace HltvApi.Parsing
 
                 if (mapName == "" || teamName == "")
                 {
+                    teamName = "";
                     mapName = cleanVeto.Split(" ", StringSplitOptions.RemoveEmptyEntries)[0];
-                    action = "other";
+                    action = "was left over";
                 }
 
                 if (teamName != "")
@@ -180,6 +183,7 @@ namespace HltvApi.Parsing
             }
             model.Team2Players = team2Players.ToArray();
 
+            //Console.WriteLine(model.Team1.Name);
             return model;
         }
 
