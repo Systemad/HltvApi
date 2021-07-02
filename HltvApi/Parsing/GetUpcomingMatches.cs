@@ -49,8 +49,9 @@ namespace HltvApi.Parsing
                     model.Date = DateTimeFromUnixTimestampMillis(unixDateMilliseconds);
 
                     //Event ID and name
+                    // TODO: Properly fix event ID (if even needed)
                     Event eventModel = new Event();
-                    string eventImageUrl = upcomingMatchNode.QuerySelector(".matchEventLogo").Attributes["src"].Value;
+                    //string eventImageUrl = upcomingMatchNode.QuerySelector(".matchEventLogo").Attributes["src"].Value;
                     //eventModel.Id = int.Parse(matchPageUrl.Split("/").First());
                     //eventModel.Id = int.Parse(eventImageUrl.Split("/").Last().Split(".").First());
                     //eventModel.Name = document.QuerySelector(".matchEventName").Attributes["title"].Value;
@@ -58,7 +59,7 @@ namespace HltvApi.Parsing
                     model.Event = eventModel;
 
                     //Number of stars
-                    model.Stars = upcomingMatchNode.QuerySelectorAll(".stars i").Count();
+                    model.Stars = int.Parse(upcomingMatchNode.Attributes["stars"].Value);
                     
                     var team1Node = upcomingMatchNode.QuerySelector(".team1");
                     var team1 = team1Node.QuerySelector(".matchTeamName").InnerHtml; // Attributes["matchTeamName"].Value;
@@ -76,19 +77,13 @@ namespace HltvApi.Parsing
                     // Team 2
                     Team team2Model = new Team();
                     string team2LogoUrl = team2Node.QuerySelector(".matchTeamLogo").Attributes["src"].Value;
-                    team1Model.TeamLogoUrl = team2LogoUrl;
-                    team1Model.Name = team2;
-                    model.Team1 = team2Model;
+                    team2Model.TeamLogoUrl = team2LogoUrl;
+                    team2Model.Name = team2;
+                    model.Team2 = team2Model;
 
                     //Map and format
-                    string mapText = upcomingMatchNode.QuerySelector(".map-text").InnerText;
-                    if (mapText.Contains("bo"))
-                        model.Format = mapText;
-                    else
-                    {
-                        model.Format = "bo1";
-                        model.Map = MapSlug.MapSlugs[mapText];
-                    }
+                    string mapText = upcomingMatchNode.QuerySelector(".matchMeta").InnerText;
+                    model.Format = mapText;
 
                     upcomingMatches.Add(model);
                 }
